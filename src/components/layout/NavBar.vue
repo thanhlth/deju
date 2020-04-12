@@ -2,20 +2,30 @@
 <div class="navbar">
     <nav class="deep-purple darken-1">
         <div class="container">
-            <a href="" class="brand-logo left">Deju</a>
+            <router-link :to="{name: 'Home'}"> Deju</router-link>
             <ul class="right">
-                <li><a href="">Sign Up</a></li>
-                <li><a href="">Log in</a></li>
+                <li><router-link :to="{ name :'Signup' }">Sign Up</router-link></li>
+                <li><router-link :to="{ name :'Login' }">Log in</router-link></li>
+                <li><a @click="logout">Logout</a></li>
             </ul>
         </div>
     </nav>
 </div>
 </template>
 <script>
+import firebase from 'firebase'
 export default {
     name:'NavBar',
     data(){
         return{
+
+        }
+    },
+    methods:{
+        logout(){
+            firebase.auth().signOut().then(() =>{
+              this.$router.push({ name:'Login'})
+            })
 
         }
     }

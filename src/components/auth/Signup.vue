@@ -1,6 +1,6 @@
 <template>
   <div class="signup container">
-    <form action @submit.prevent="signup" class="card-panel">
+    <form  @submit.prevent="signup" class="card-panel">
       <h2 class="center deep-purple-text">Signup</h2>
       <div class="field">
         <label for="email">Email:</label>
@@ -50,15 +50,13 @@ export default {
             this.feedback= 'This alias already exists'
           }else {
             firebase.auth().createUserWithEmailAndPassword(this.email, this.password)
-            .then(cred => {
-              console.log(cred.user)
-            })
-            .then(user => {
+            /*.then(cred =>{
               ref.set({
                 alias: this.alias,
-                user_id: user.uid
+                _id: cred.id
               })
-            }).then(() => {
+            })*/
+            .then(() => {
               this.$router.push({name: 'Home'})
             })
             .catch(err =>{
