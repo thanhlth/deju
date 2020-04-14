@@ -17,7 +17,17 @@ export default {
     },
     created(){
         console.log(firebase.auth().currentUser)
+        /*db.collection('users').get().then( users =>{
+            users.docs.forEach(doc => {
+                let data= doc.data()
+                if(data.user){
+                    //
+                    marker.add
+                }
+            });
+        })*/
         }
+        
 }
 </script>
 <style>
