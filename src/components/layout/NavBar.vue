@@ -6,7 +6,7 @@
             <ul class="right">
                 <li v-if="!user"><router-link :to="{ name :'Signup' }">Sign Up</router-link></li>
                 <li v-if="!user"><router-link :to="{ name :'Login' }"><a>Log in </a></router-link></li>
-                <li v-if="user">{{ user.email }}</li>
+                <li v-if="user"><a  @click="gotohome">{{ user.email }}</a></li>
                 <li v-if="user"><a @click="logout">Logout</a></li>
             </ul>
         </div>
@@ -15,6 +15,7 @@
 </template>
 <script>
 import firebase from 'firebase'
+import db from '@/firebase/init'
 export default {
     name:'NavBar',
     data(){
@@ -24,9 +25,20 @@ user:null
     },
     methods:{
         logout(){
-            firebase.auth().signOut().then(() =>{
+            firebase.auth().signOut().then(() => {
               this.$router.push({ name:'Login'})
             })
+
+        },
+        gotohome(){
+            db.collection('users').get().then(users => {
+                users.docs.forEach(doc  => {
+                    let data=doc.data()
+ this.$router.push({name: 'ViewProfile', params: {id: doc.id} })
+                })
+                
+            })
+           
 
         }
     },

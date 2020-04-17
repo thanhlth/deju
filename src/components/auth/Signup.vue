@@ -50,12 +50,12 @@ export default {
             this.feedback= 'This alias already exists'
           }else {
             firebase.auth().createUserWithEmailAndPassword(this.email, this.password)
-            /*.then(cred =>{
+            .then(cred =>{
               ref.set({
                 alias: this.alias,
-                _id: cred.id
+                user_id: cred.user.uid
               })
-            })*/
+            })
             .then(() => {
               this.$router.push({name: 'Home'})
             })
